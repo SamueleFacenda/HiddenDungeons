@@ -1,4 +1,4 @@
-package com.company;
+package com;
 
 abstract class Action {
     String actionName;
