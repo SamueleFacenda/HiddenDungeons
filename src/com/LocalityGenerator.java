@@ -4,11 +4,12 @@ import java.util.random.RandomGenerator;
 
 public class LocalityGenerator {
     private static LocalityGenerator singleInstance = null;
+    private int difficulty=0;
 
-    String namePool[] ={"Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","","",""};
-    String aggettivi[] ={"Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","","",""};
+    Name namePool[] ={"Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","","",""};
+    Name aggettivi[] ={"Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","","",""};
 
-    private Locality generateLocality(){
+    public Locality generateLocality(){
         String name;
         int ind, indAgg, lucky, danger;
         ind = (int)(Math.random()*((20-1)+1)+1);
@@ -33,5 +34,12 @@ public class LocalityGenerator {
         if (singleInstance == null)
             singleInstance = new LocalityGenerator();
         return singleInstance;
+    }
+
+    protected static void createInstance(int difficulty){
+        if(singleInstance == null){
+            singleInstance = new LocalityGenerator();
+            singleInstance.difficulty = difficulty;
+        }
     }
 }
