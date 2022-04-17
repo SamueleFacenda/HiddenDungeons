@@ -1,12 +1,9 @@
 package com;
 
-import com.sun.source.doctree.EndElementTree;
 
-import java.awt.event.ItemEvent;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
+import com.map.GameMap;
 
 
 public class Game {
@@ -24,7 +21,8 @@ public class Game {
 
     public Game(String time,String name, PlayerType type, int difficulty){
         inventory=new ArrayList<Item>();
-        map=new GameMap(difficulty);
+        map=new GameMap();
+        LocalityGenerator.createInstance(difficulty);
         cash=0;
         life=type.getLife();
         clas=type;
@@ -215,7 +213,7 @@ public class Game {
 
     private void showStats() {
         System.out.println("vita:"+life);
-        System.out.println("chash:"+chash);
+        System.out.println("chash:"+cash);
         for(Weapon e:equipement)
             if(e!=null) System.out.println("Arma:"+e.getName());
     }
