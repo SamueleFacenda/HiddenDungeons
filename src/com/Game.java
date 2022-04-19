@@ -47,8 +47,10 @@ public class Game {
                 choose = in.nextLine();
                 choose= ""+checkForActions(choose.charAt(0));
                 if(choose.equals("I")) locality(map.getLoc());
-            }while (!choose.equals("E"));
+            }while (!choose.equals("E") && life > 0);
             System.out.println("\nGrazie per aver giocato");
+            if(life<=0)
+                System.out.println("Hai perso, riprova");
             isPlaying=false;
         }
     }
@@ -108,8 +110,54 @@ public class Game {
     }
 
     private void fight(Enemy ene){
+        System.out.println("\nInizio combattimento\n");
+        String choose="";
+        boolean turn=true;
+        while(ene.getLife()>0 && life>0){
+            if (turn) {
+                System.out.println("\nInserisci scelta, E per uscire, A per attaccare, D per usare un oggetto:\n");
+                choose = in.nextLine();
+                choose = "" + checkForActions(choose.charAt(0));
+                if (choose.equals("A")) {
+                    attack(ene);
+                } else if (choose.equals("D"))
+                    use();
+                else if (choose.equals("E"))
+                    break;
+            }else{
+                enemyAttack(ene);
+            }
+            turn=!turn;
+        }
+        if(!choose.equals("E")){
+            if (life <= 0) {
+                System.out.println("\nHai perso");
+            } else {
+                System.out.println("\nHai vinto, hai guadagnato " + ene.getCash() + " euro");
+                cash += ene.getCash();
+            }
+        }
 
+    }
 
+    private void attack(Enemy ene){
+        int damage=0;
+        for(int i=0;i<4;i++)
+            if(equipement[i]!=null)
+                damage+=equipement[i].getDamage();
+        damage+=clas.getDamage();
+        ene.setLife(ene.getLife()-damage);
+        System.out.println("\nAttacco effettuato, hai inflitto "+damage+" danni");
+    }
+    private void enemyAttack(Enemy ene){
+        int damage=ene.getDamage();
+        int protection=0;
+        for(int i=0;i<4;i++)
+            if(equipement[i]!=null) {
+                protection += equipement[i].getProtection();
+            }
+        life-=damage-protection;
+        System.out.println("\nL'avversario ha inflitto "+damage+" danni");
     }
 
     private void mappa(){

@@ -19,6 +19,10 @@ public class Locality {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Item Actiop(){
 
     }

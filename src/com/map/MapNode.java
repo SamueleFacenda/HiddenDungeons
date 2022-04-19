@@ -42,6 +42,11 @@ public class MapNode {
 
     private MapNode[] neighbours;
 
+    /**
+     * costruttore semplice, con la localita' e la coordinata
+     * @param locality localita'
+     * @param coor coordinata del nodo
+     */
     public MapNode(Locality locality, Coor coor){
         this.locality = locality;
         this.coor = coor;
@@ -50,6 +55,11 @@ public class MapNode {
         neighbours = new MapNode[3];
     }
 
+    /**
+     * aggiungo un nodo vicino, se non esiste
+     * @param node nodo vicino
+     * @param direction direzione in cui vedo il nodo
+     */
     private void addNear(MapNode node, int direction){
         if(neighbours[direction] == null) {
             neighbours[direction] = node;
@@ -57,6 +67,9 @@ public class MapNode {
         };
     }
 
+    /**
+     * genera i nodi vicini, se non esistono
+     */
     public void generateNear(){
         for(int i = 0; i < neighbours.length; i++){
             if(neighbours[i] == null){
@@ -66,6 +79,10 @@ public class MapNode {
         }
     }
 
+    /**
+     * inserisce un nodo nella lista dei nodi e nel posto giusto per tutti i nodi vicini
+     * @param to nodo da inserire
+     */
     private static void insertNode(MapNode to){
         for(MapNode node : nodes){
             if(node.coor.isDiagonal(to.coor)){
@@ -78,10 +95,52 @@ public class MapNode {
         return locality;
     }
 
+    /**
+     * ritorna una stringa con un disegno della mappa del nodo e dei nodi vicini
+     * @return mappa bellina
+     */
     public String getMap(){
         char[][] map = new char[20][50];
         boolean isDritto = coor.getY() % 2 == 0;
+        if(isDritto){
+            for (int i = 0; i < 10; i++)
+                map[i][25] = '|';
+            for (int i = 10; i < 20; i++) {
+               map[i][25+i*2-20] = '\\';
+               map[i][25-(i*2-20)] = '/';
+            }
+            addQuad(map, 20, 0, getInDir(0).getLocality().getName());
+            addQuad(map,0,14, getInDir(2).getLocality().getName());
+            addQuad(map,30, 14, getInDir(1).getLocality().getName());
+        }else{
+            for (int i = 10; i < 20; i++)
+                map[i][25] = '|';
+            for (int i = 0 ; i < 10; i++) {
+                map[i][i*2] = '\\';
+                map[i][29-i*2] = '/';
+            }
+            addQuad(map, 20, 14, getInDir(0).getLocality().getName());
+            addQuad(map,0,0, getInDir(1).getLocality().getName());
+            addQuad(map,30, 0, getInDir(2).getLocality().getName());
+        }
+        addQuad(map, 8,20, locality.getName());
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < 20; i++){
+            for(int j = 0; j < 50; j++){
+                sb.append(map[i][j]==0 ? ' ' : map[i][j]);
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
+
+    /**
+     * metodo di supporto per getMap(), aggiunge un disegno di un quadrato alla mappa, con i bordi e gli a capi a ogni parola
+     * @param map array di char in cui aggiungere il nome
+     * @param x coordinata x dell'angolo in alto a sinistra
+     * @param y coordinata y dell'angolo in alto a sinistra
+     * @param in nome da aggiungere
+     */
     private static void addQuad(char[][] map, int x, int y, String in){
         String[] parole = in.split(" ");
         int maxLen = Arrays.stream(parole).max(Comparator.comparingInt(String::length)).get().length();
@@ -107,6 +166,11 @@ public class MapNode {
         }
     }
 
+    /**
+     * per avere il nodo in una direzione
+     * @param n direzione
+     * @return nodo in quella direzione
+     */
     public MapNode getInDir(int n) {
         return neighbours[n];
     }
