@@ -1,7 +1,7 @@
 package com.map;
 
-import com.Locality;
-import com.LocalityGenerator;
+import com.loc.Locality;
+import com.loc.LocalityGenerator;
 
 public class GameMap {
 
@@ -21,8 +21,8 @@ public class GameMap {
         current = current.getInDir(n);
         current.generateNear();
     }
-    public Locality getLoc(){
-        return current.getLoc();
+    public Locality getLocality(){
+        return current.getLocality();
     }
 
 }

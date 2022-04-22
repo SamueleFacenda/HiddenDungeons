@@ -1,7 +1,7 @@
 package com.map;
 
-import com.Locality;
-import com.LocalityGenerator;
+import com.loc.Locality;
+import com.loc.LocalityGenerator;
 
 import java.util.Arrays;
 import java.util.Comparator;

@@ -1,8 +1,17 @@
 package com;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
+import com.items.Enemy;
+import com.items.Item;
+import com.items.Potion;
+import com.loc.Action;
+import com.loc.Locality;
+import com.loc.LocalityGenerator;
+import com.loc.Shop;
 import com.map.GameMap;
 
 
@@ -46,7 +55,7 @@ public class Game {
                 System.out.println("\nInserisci scelta, E per uscire, I per entrare nella località:\n");
                 choose = in.nextLine();
                 choose= ""+checkForActions(choose.charAt(0));
-                if(choose.equals("I")) locality(map.getLoc());
+                if(choose.equals("I")) locality(map.getLocality());
             }while (!choose.equals("E") && life > 0);
             System.out.println("\nGrazie per aver giocato");
             if(life<=0)
