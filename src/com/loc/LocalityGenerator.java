@@ -4,8 +4,8 @@ public class LocalityGenerator {
     private static LocalityGenerator singleInstance = null;
     private int difficulty=0;
 
-    Name namePool[] ={"Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","","",""};
-    Name aggettivi[] ={"Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","","",""};
+    String namePool[] ={"Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","Sample","Sample","Sample","Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","Sample","Sample","Sample","Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","Sample","Sample","Sample"};
+    String aggettivi[] ={"Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","","","","Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","Sample","Sample","Sample","Casa ","Locanda ","Chiesa ","Gilda ","Villa ","Grotta ","Sample","Sample","Sample"};
 
     public Locality generateLocality(){
         String name;
@@ -25,7 +25,7 @@ public class LocalityGenerator {
             lucky=(int) (Math.random() * ((10 - 5) + 1) + 5);
             danger=(int) (Math.random() * ((5 - 1) + 1) + 1);
         }
-        //return Locality(name,danger,lucky);
+        return new Locality(name,danger,lucky);
     }
 
     public static LocalityGenerator getInstance() {
