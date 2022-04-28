@@ -34,10 +34,7 @@ public class LocalityGenerator {
         return singleInstance;
     }
 
-    public static void createInstance(int difficulty){
-        if(singleInstance == null){
-            singleInstance = new LocalityGenerator();
-            singleInstance.difficulty = difficulty;
-        }
+    public static void setDifficulty(int difficulty){
+        singleInstance.difficulty=difficulty;
     }
 }

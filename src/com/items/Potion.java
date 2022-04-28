@@ -1,8 +1,5 @@
 package com.items;
 
-
-import com.items.Item;
-
 public class Potion extends Item {
 
     private int value;

@@ -31,14 +31,14 @@ public class Game {
     public Game(String time,String name, PlayerType type, int difficulty){
         inventory=new ArrayList<Item>();
         map=new GameMap();
-        LocalityGenerator.createInstance(difficulty);
+        LocalityGenerator.setDifficulty(difficulty);
         cash=0;
         life=type.getLife();
         clas=type;
         characterName=name;
         equipement=new Item[4];
         isPlaying = false;
-        LocalityGenerator.createInstance(difficulty);
+        LocalityGenerator.setDifficulty(difficulty);
     }
     public void main(){
         if(!isPlaying){
