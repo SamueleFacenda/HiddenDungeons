@@ -9,7 +9,6 @@ public class Locality {
     String name;
     int danger, lucky;
 
-    LocalType locType;
     ArrayList<Action> actions;
 
     public Locality(String name, int danger, int lucky) {
@@ -19,6 +18,8 @@ public class Locality {
     }
 
     public String getAtcions(){
+        if(lucky>=10)
+            return
 
     }
 
@@ -26,7 +27,7 @@ public class Locality {
         return name;
     }
 
-    public Item Actiop(){
+    public Item Action(){
 
     }
 }
